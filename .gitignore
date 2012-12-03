@@ -2,3 +2,4 @@
 *.sublime-*
 _dev/*
 offline.appcache
+scripts/config.ini
