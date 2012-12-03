@@ -1,0 +1,93 @@
+<html manifest="./offline.appcache">
+<!-- <html> -->
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/vendor/prettify.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />
+
+		<script type="text/javascript" src="js/vendor/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/vendor/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript" src="js/vendor/prettify.js"></script>
+		<script type="text/javascript" src="js/vendor/showdown.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</head>
+	<body>
+
+		<div id="system-update">
+			<div>
+				<!-- gives updates on the system updatting -->
+				<div class="small">System status:</div>
+				<div class="message"><!-- provides an update for the system sync --></div>
+				<div class="progress"><div></div></div>
+			</div>
+
+			<!-- states which content file is being downloaded -->
+			<div id="file-download">
+				<div class="small">Content status:</div>
+				<div class="filename"><!-- will contain the filename --></div>
+			</div>
+
+			<!-- some additional helper information -->
+			<div class="smaller">
+				Please check the developer log for more information.
+			</div>
+		</div>
+
+		<div id="config-screen">
+			<h2>
+				The following groups are available:
+			</h2>
+			<div id="suggestions-frame">
+				<!-- project names will be placed here, as pulled from the XML -->
+			</div>
+			<h2>
+				Setting up a new machine? 
+			</h2>
+			<p>
+				Try using this <a href="./scripts/setup.sh">script</a>
+			</p>
+		</div>
+
+		<!-- the frame that holds the showcase content -->
+		<table id="frame">
+			<tr>
+				<td colspan="2" id="pane-title">
+					<div>
+						<div class="placeholder group-logo"></div>
+						<div class="placeholder group-title"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td id="pane-details" class="resize-to-fit-content" data-default-width="25">
+					<div class="placeholder group-blurb"></div>
+					<div class="placeholder project-title"></div>
+					<div class="placeholder project-blurb"></div>
+				</td>
+				<td id="pane-contents" rowspan="2">
+					<div>
+						<div class="placeholder project-file"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td id="pane-contact">
+					<div class="placeholder group-contact"></div>
+					<div class="placeholder project-contact"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" id="branding-footer">
+					<div>Billboard demo</div>
+					<div id="progress">
+						<div></div>
+					</div>
+					<div id="project-markers"></div>
+				</td>
+			</tr>
+		</table>
+
+		<!-- a button for skipping to the next project -->
+		<div id="next"></div>
+	</body>
+</html>

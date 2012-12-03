@@ -1,0 +1,395 @@
+/*
+
+Billboard - a program for cycling through a mix of user provided content, in
+manner that is visually captivating. It is well suited to foyer and marketing
+displays.
+
+Copyright (C) 2012 Torben Sko, Henry Gardner
+
+This file is provided under the MIT License. Permission is hereby granted,
+free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
+
+
+* {
+	padding:0;
+	margin:0;
+}
+h1, h2, h3, h4 {
+	font-weight:normal;
+	font-size:1em;
+}
+
+body, table {
+	/*
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+	font-family: 'Lato', "Helvetica Neue", "Arial", sans-serif;
+	*/
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+	font-weight:lighter;
+	font-size:16pt;
+/*	line-height:1.1em;*/
+/*	letter-spacing:1px;*/
+	/*background:#cef;*/
+	color:#555;
+	border:none;
+}
+
+body {
+	position:relative;
+	overflow:hidden;
+	background:#eee;
+}
+
+p {
+	margin-bottom:10px;
+}
+
+ul, ol {
+	padding-left:1.2em;
+}
+li {
+	padding-bottom:0.5em;
+}
+
+
+.small {
+	font-size:80%;
+}
+
+.smaller {
+	font-size:65%;
+}
+
+
+
+
+/* SYSTEM UPDATE */
+
+#system-update {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0, 0.9);
+	color: #ddd;
+	font-size: 16pt;
+	text-align: center;
+	z-index:100;
+}
+#system-update > div {
+	width:80%;
+	display:inline-block;
+	margin-top:20px;
+}
+
+#system-update .progress {
+	height:30px;
+	border:#ddd 3px solid;
+	display:none;
+}
+
+#system-update .progress div {
+	width:0%;
+	background:#aaa;
+	height:100%;
+}
+
+#file-download {
+	display:none;
+}
+
+
+
+
+
+
+
+/* the bit that holds the poster names */
+#config-screen {
+	padding:3em;
+	display:none;
+}
+
+
+
+#suggestions-frame {
+	padding:0.6em 3em;
+}
+
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	position:fixed;
+}
+
+.prettyprint {
+	font-size:8pt;
+}
+
+
+
+#project-markers {
+	position:absolute;
+	bottom:100%;
+	width:100%;
+	text-align:right;
+	padding-bottom:12px;
+}
+#project-markers div {
+	width:30px;
+	height:30px;
+	line-height:30px;
+	color:white;
+	border-radius:5px;
+	background:#aaa;
+	display:inline-block;
+	margin-right:10px;
+	text-align:center;
+	vertical-align:top;
+}
+#project-markers div.selected {
+	background:#666;
+}
+
+
+
+#progress {
+	position:absolute;
+	bottom:100%;
+	width:100%;
+	background:rgba(0,0,0,0.1);
+}
+
+#progress div {
+	background:rgba(0,0,0,0.2);
+}
+#progress,
+#progress div {
+	height:5px;
+}
+
+
+#next {
+	position:fixed;
+	right:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:100;
+}
+
+
+#branding-footer {
+	position:relative;
+	width:100%;
+	z-index:2;
+	line-height:4em;
+	height:4em;
+	background-image:url('logo.png');
+	background-color:#333;
+	background-repeat:no-repeat;
+	background-position:right;
+	background-size:contain;
+}
+
+#branding-footer > div:nth-child(1) {
+	padding:0 1em;
+	font-family:Helvetica;
+	font-weight:normal;
+	height:4em;
+	line-height:4em;
+	text-transform:uppercase;
+	vertical-align:middle;
+	color:#DDDDDD;
+}
+
+
+
+
+
+#frame {
+	width:100%;
+	height:100%;
+}
+
+.placeholder {
+	display:none;
+}
+
+#pane-title {
+	width:100%;
+	font-size:180%;
+/*	font-weight:bold;*/
+/*	background:red;*/
+}
+
+#pane-title > div {
+	display:table;
+	vertical-align: middle;
+	padding-left: 20px;
+}
+
+/* we only add padding if content exists */
+#pane-title > div > * {
+	padding-top:20px;
+	display:table-cell;
+}
+
+#pane-details {
+	width:30%;
+	vertical-align:top;
+	padding:10px 20px 20px 20px;
+	position:relative;
+	height:100%;
+	/*background:red;*/
+}
+
+#pane-contents {
+/*	width:70%;*/
+/*	position:absolute;
+	bottom:5em;
+	right:1em;*/
+	height:100%;
+	position:relative;
+	padding-left:20px;
+/*	border:1px solid green;*/
+/*	background:blue;*/
+}
+
+#pane-contents > div {
+	width:100%;
+	height:100%;
+	position:relative;
+/*	background:orange;*/
+}
+
+#pane-contact {
+	vertical-align:bottom;
+	position:relative;
+	height:35px;
+	font-size:75%;
+}
+
+.group-logo {
+/*	position:absolute;
+	right:0;
+	top:0;
+	padding:10px 10px 0px 0px;*/
+/*	height:100%;*/
+	height:1.8em;
+	margin-right:10px;
+/*	border:1px solid black;*/
+}
+
+.group-title {
+	display:inline;
+	line-height:2em;
+/*	background:blue;*/
+}
+.group-title > p {
+	padding:0;
+	margin:0;
+	display:inline;
+	vertical-align:top;
+}
+
+#pane-contact div {
+	position:absolute;
+	bottom:0px;
+	left:10px;
+	width:40em;
+/*	background:red;*/
+}
+#pane-contact strong {
+}
+
+.group-blurb {
+}
+
+.project-title,
+.project-blurb h1 {
+	padding-top:20px;
+	padding-bottom:5px;
+	font-size:130%;
+	font-weight:normal;
+}
+.project-blurb h2 {
+	padding-bottom:16px;
+	font-size:110%;
+	font-weight:normal;
+}
+
+.project-blurb p {
+	font-size:90%;
+}
+
+.project-blurb img {
+	max-width: 14em;
+	float: left;
+	padding-right: 18px;
+}
+
+.project-title,
+.project-blurb {
+	color:#666;
+}
+
+.project-file {
+}
+
+#pane-contents .project-file {
+	position:absolute;
+	right:0;
+	bottom:0;
+	border:6px solid white;
+	box-shadow:0 0 10px rgba(0,0,0,0.5);
+	max-width:95%;
+	max-height:95%;
+}
+#pane-contents img.project-file {
+	max-width:80%;
+	max-height:80%;
+}
+
+canvas.project-file {
+}
+
+.full-screen-frame {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align:center;
+	background-color:#888;
+	background-image:url("full-screen.png");
+}
+
+.full-screen-frame .project-file {
+	/* this shadow really slows it down*/
+/*	box-shadow:0 0 20px rgba(0,0,0,0.8);*/
+	max-width:100%;
+	max-height:100%;
+}
+
