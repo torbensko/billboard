@@ -6,7 +6,7 @@ echo "CACHE MANIFEST" > offline.appcache
 echo "" > offline.appcache.tmp
 
 # to do: this doesn't work properly if the file has spaces
-for f in `find . | grep -Ev "\./README|\./contents|\./_dev|\.php$|/\.|offline\.appcache" | grep -E "\.[^/]+$"`; do
+for f in `find . | grep -Ev "\./README|\./contents|\./_dev|\.php$|\.ini$|/\.|offline\.appcache" | grep -E "\.[^/]+$"`; do
 	echo $f >> offline.appcache
 	if [[ `which md5` ]]; then
 		echo $(md5 -q $f) >> offline.appcache.tmp
