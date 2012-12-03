@@ -2,7 +2,7 @@
 
 This program cycles through a mix of user provided content (images, video and text), in
 manner that is visually captivating. It is well suited to foyer and marketing
-displays. For example, the system has been used in a unversity context to display the following:
+displays. For example, the system has been used in a university context to display the following:
 
 *	The work of a *research group* by showing the details of some of the projects undertaken by the group.
 *	An *undergraduate course* via examples of students work.
@@ -27,46 +27,46 @@ For example, all three groups mentioned above (the research group, undergrad cou
 
 The following explains what kinds of content the system accepts:
 
-- *Content Type:* title.txt (or .md)
-- *Allowable within:* group, project
-- *Purpose:* The title for the group and/or project. As with all text within the system, it can be styled using *Markdown* [see here for the documentation](http://daringfireball.net/projects/markdown/syntax).
-- - -
-- *Content Type:* blurb.txt (or .md)
-- *Allowable within:* group, project
-- *Purpose:* Text to explain the group and/or project. Of note, a first level heading in a project blurb will look the same as the project title (title.txt), making it possible to include both the title and blurb in the one file
-- - -
-- *Content Type:* contact.txt (or .md)
-- *Allowable within:* group, project
-- *Purpose:* This should contain the contact details for someone an interested viewer can contact in the event they want more information.
-- - -
-- *Content Type:* logo.png
-- *Allowable within:* group
-- *Purpose:* A group logo
-- - -
-- *Content Type:* image files (e.g. jpg, png)
-- *Allowable within:* project
-- *Purpose:* Images are shown on top of each other, in a photo montage
-- - -
-- *Content Type:* video files (e.g. mov, mp4)
-- *Allowable within:* project
-- *Purpose:* Videos are played one at a time, in their entirety
-- - -
-- *Content Type:* Processing code (i.e .pde)
-- *Allowable within:* project
-- *Purpose:* Processing pieces run in browser using the Javascript port of Processing (http://processingjs.org). Processing-JS provides complete coverage of the processing API, however external Java libraries are not supported
-- - -
-- *Content Type:* symbolic link (to an existing project)
-- *Allowable within:* group
-- *Purpose:* A symbolic link to another group's project can be included, allowing projects to be contained within multiple projects. For example, it is possible to cycle through all the projects by creating a new group and adding a symbolic link for each and every project
+*	- *Content Type:* title.txt (or .md)
+	- *Allowable within:* group, project
+	- *Purpose:* The title for the group and/or project. As with all text within the system, it can be styled using *Markdown* [see here for the documentationn](http://daringfireball.net/projects/markdown/syntax).
+
+*	- *Content Type:* blurb.txt (or .md)
+	- *Allowable within:* group, project
+	- *Purpose:* Text to explain the group and/or project. Of note, a first level heading in a project blurb will look the same as the project title (title.txt), making it possible to include both the title and blurb in the one file
+
+*	- *Content Type:* contact.txt (or .md)
+	- *Allowable within:* group, project
+	- *Purpose:* This should contain the contact details for someone an interested viewer can contact in the event they want more information.
+
+*	- *Content Type:* logo.png
+	- *Allowable within:* group
+	- *Purpose:* A group logo
+
+*	- *Content Type:* image files (e.g. jpg, png)
+	- *Allowable within:* project
+	- *Purpose:* Images are shown on top of each other, in a photo montage
+
+*	- *Content Type:* video files (e.g. mov, mp4)
+	- *Allowable within:* project
+	- *Purpose:* Videos are played one at a time, in their entirety
+
+*	- *Content Type:* Processing code (i.e .pde)
+	- *Allowable within:* project
+	- *Purpose:* Processing pieces run in browser using the Javascript port of Processing (http://processingjs.org). Processing-JS provides complete coverage of the processing API, however external Java libraries are not supported
+
+*	- *Content Type:* symbolic link (to an existing project)
+	- *Allowable within:* group
+	- *Purpose:* A symbolic link to another group's project can be included, allowing projects to be contained within multiple projects. For example, it is possible to cycle through all the projects by creating a new group and adding a symbolic link for each and every project
 
 
 The layout of these elements can be seen here:
-![An illustration of how each of the content elements are positioned.](README_img/layout_elements.png)
+![An illustration of how each of the content elements are positioned.](https://raw.github.com/torbensko/billboard/master/README_img/layout_elements.png)
 
 The layout of the page will be automatically altered to ensure all the text (titles and blurbs) is visible. If the page contains a lot of text, the remaining content will be reduced in size. It is therefore important to keep the blurbs concise.
 
 It should also be noted that all the content is optional. The following shows how the layout changes depending on what content is provided:
-![An illustration of how the system adapts it appearance based on what content is included.](README_img/layout_examples.png)
+![An illustration of how the system adapts it appearance based on what content is included.](https://raw.github.com/torbensko/billboard/master/README_img/layout_examples.png)
 
 For example, if no text is present (i.e. titles and descriptions) the content will be displayed full screen - in a slide-show manner
 
@@ -86,7 +86,7 @@ Each display computer only needs to connect to the server once in order to fetch
 
 The server has been developed in PHP and is designed to run using Apache. The server will serve up the user-provided content from a folder called *contents*. The contents of this folder may look something like the following:
 
-![Example file structure layout.](README_img/content_structure.png)
+![Example file structure layout.](https://raw.github.com/torbensko/billboard/master/README_img/content_structure.png)
 
 The first level folders are treated as *groups* and the second level as *projects* (see above). All lower level folders are ignored, allowing content to kept alongside a project without it being displayed. If a project folder is called *ignore* it, similarly, will not have its content displayed.
 
