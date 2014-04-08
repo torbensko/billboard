@@ -1,5 +1,3 @@
 .DS_Store
 *.sublime-*
 _dev/*
-offline.appcache
-scripts/config.ini

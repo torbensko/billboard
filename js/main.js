@@ -47,6 +47,9 @@ var CLASS__PROJECT = "project-";
 // used to denote a particular piece of project content
 var CLASS__CONTENT = "content-";
 
+// The file describing the structure of the contents:
+var CONTENTS_XML = './contents_static.xml'; // contents_dynamic.php'
+
 // Examples:
 //
 // Project-Group blurb:
@@ -110,25 +113,25 @@ function getXMLData(callback) {
 		return;
 	}
 
-	function _getLocalData() {
+	function _loadPrevious() {
 		contentData = window.localStorage.getItem('contentXML');
 		if(contentData == null) {
 			console.log("no content XML data exists - please reconnect this system to the internet");
 			return;
 		}
-		callback($(contentData));
+		callback( $(contentData) );
 	}
 
-	function _success(data) {
-		console.log("updatting content XML file");
-		window.localStorage.setItem('contentXML', data);
-		_getLocalData();
+	function _success( data ) {
+		var $data = $(data.documentElement);
+		window.localStorage.setItem('contentXML', $("<div>").append( $data ).html() );
+		_loadPrevious();
 	}
 
 	$.ajax({
-		url: './build_xml.php',
+		url: CONTENTS_XML,
 		success: _success,
-		error: _getLocalData
+		error: _loadPrevious,
 	});
 }
 

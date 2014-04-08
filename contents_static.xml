@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF8"?>
+<contents><group name="group-1_content_types" depth="1" path="./contents/group-1_content_types"><text type="blurb">This demonstrates the types of content that is supported by this system. You can also click to skip to the next piece of content.
+
+All content here is provided under a Creative Commons Attribution license (CC BY 3.0).</text><text type="contact">git@torbensko.com</text><project name="project_1" depth="2" path="./contents/group-1_content_types/project_1"><file path="./contents/group-1_content_types/project_1/IMG_0448.JPG" name="IMG_0448"/><file path="./contents/group-1_content_types/project_1/IMG_0449.jpg" name="IMG_0449"/><file path="./contents/group-1_content_types/project_1/IMG_0455.JPG" name="IMG_0455"/><file path="./contents/group-1_content_types/project_1/IMG_0461.JPG" name="IMG_0461"/><text type="blurb"># A Photo Album
+
+A collection of images of Melbourne, Australia, as taken by myself. This illustrates how photos are displayed when other content (titles, descriptions) are present.</text></project><project name="project_2" depth="2" path="./contents/group-1_content_types/project_2"><file path="./contents/group-1_content_types/project_2/Sequence.mp4" name="Sequence"/><text type="blurb"># Video content
+
+A video taken in Melbourne, Australia, as taken by myself. Videos are displayed in a straightforward manner, to ensure they run as quickly as possible.</text></project><project name="project_3" depth="2" path="./contents/group-1_content_types/project_3"><file path="./contents/group-1_content_types/project_3/SimpleLines.pde" name="SimpleLines"/><text type="blurb"># Processsing
+
+The system supports Processing works, using the JavaScript port of Processing. For more information, please refer to the Processing site.</text><text type="contact">me@torbensko.com</text></project><text type="title">Content Demostratation (*please replace with your own content*)</text></group><group name="group-2_pictures_only" depth="1" path="./contents/group-2_pictures_only"><project name="picture_slideshow" depth="2" path="./contents/group-2_pictures_only/picture_slideshow"><file path="./contents/group-2_pictures_only/picture_slideshow/IMG_0322.JPG" name="IMG_0322"/><file path="./contents/group-2_pictures_only/picture_slideshow/IMG_0434.JPG" name="IMG_0434"/></project></group></contents>
+

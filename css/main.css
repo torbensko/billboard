@@ -32,6 +32,7 @@ SOFTWARE.
 * {
 	padding:0;
 	margin:0;
+	box-sizing: border-box;
 }
 h1, h2, h3, h4 {
 	font-weight:normal;
@@ -252,16 +253,16 @@ pre {
 
 /* we only add padding if content exists */
 #pane-title > div > * {
-	padding-top:20px;
+	margin-top: 20px;
 	display:table-cell;
 }
 
 #pane-details {
 	width:30%;
 	vertical-align:top;
-	padding:10px 20px 20px 20px;
+	padding: 10px 20px 20px 20px;
 	position:relative;
-	height:100%;
+	height: 100%;
 	/*background:red;*/
 }
 

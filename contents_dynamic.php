@@ -34,7 +34,9 @@ SOFTWARE.
  * Spits the contents out to a variable called XMLdata
  */
 
-require_once("globals.php");
+define("LF", chr(10));
+
+define("DIR__CONTENTS",	"./contents");
 
 // folders that are not included in the XML
 define("IGNORE_FOLDERS", "/(ignore(d)?|private|src)\/?$/");
