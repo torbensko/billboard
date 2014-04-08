@@ -1,94 +1,108 @@
 # Overview
 
-This program cycles through a mix of user provided content (images, video and text), in
-manner that is visually captivating. It is well suited to foyer and marketing
-displays. For example, the system has been used in a university context to display the following:
+The billboard program is a HTML 5 webapp designed to continually cycle through a mix of user provided content, including images, video, text and [Processing](www.processing.org) pieces. The system is well suited to public displays, such as foyer displays.
 
-*	The work of a *research group* by showing the details of some of the projects undertaken by the group.
-*	An *undergraduate course* via examples of students work.
-*	A *special interest group*, such as a Computer Science Student Association (CSSA), by showing images from several of the group events.
+A demo of the piece can be found on my [website](http://local.torbensko.com/downloads/billboard).
 
-Some of the key features of the system include:
+## Features
 
-*	Easy, one-time set up for each display computer.
-*	Beyond the set up, the system does not require an internet connection, allowing it to (theoretically) run indefinitely.
-*	It only requires the Chrome web-browser, making it easy to set up, free and cross-platform.
-*	It includes a script to help set up a computer from scratch. The script allows an operational period to be specified, ensuring each display computer can run unaided.
-*	The system automatically determines how best to display the user-provided content. The user need only provide their content.
-*	Includes support for text, images, video and [Processing](www.processing.org) artworks.
+*	Runs on Chrome making it a cross-platform solution
+*	Automatically downloads and caches all files making it possible to use the system without an internet connection
+*	Includes a script to configure a Ubuntu box into a completely automated billboard
+*	Dynamically changes it appearance based on the content including a full-screen image mode.
 
 
-
-# Content Organisation
-
-The content displayed by the system is organised into *groups* and *projects*. Each *group* contains one or more *projects*, with all the projects being related to a common, group theme, e.g. the works of a research group. At any given time, a computer will cycle through the *projects* of a chosen *group*. The computer retains the content for all *groups*, thereby allowing it to used to show a different *group* in the future.
-
-For example, all three groups mentioned above (the research group, undergrad course and special interest group) could be loaded onto a display computer, although only one can be displayed a once.
-
-The following explains what kinds of content the system accepts:
-
-*	- *Content Type:* title.txt (or .md)
-	- *Allowable within:* group, project
-	- *Purpose:* The title for the group and/or project. As with all text within the system, it can be styled using *Markdown* [see here for the documentationn](http://daringfireball.net/projects/markdown/syntax).
-
-*	- *Content Type:* blurb.txt (or .md)
-	- *Allowable within:* group, project
-	- *Purpose:* Text to explain the group and/or project. Of note, a first level heading in a project blurb will look the same as the project title (title.txt), making it possible to include both the title and blurb in the one file
-
-*	- *Content Type:* contact.txt (or .md)
-	- *Allowable within:* group, project
-	- *Purpose:* This should contain the contact details for someone an interested viewer can contact in the event they want more information.
-
-*	- *Content Type:* logo.png
-	- *Allowable within:* group
-	- *Purpose:* A group logo
-
-*	- *Content Type:* image files (e.g. jpg, png)
-	- *Allowable within:* project
-	- *Purpose:* Images are shown on top of each other, in a photo montage
-
-*	- *Content Type:* video files (e.g. mov, mp4)
-	- *Allowable within:* project
-	- *Purpose:* Videos are played one at a time, in their entirety
-
-*	- *Content Type:* Processing code (i.e .pde)
-	- *Allowable within:* project
-	- *Purpose:* Processing pieces run in browser using the Javascript port of Processing (http://processingjs.org). Processing-JS provides complete coverage of the processing API, however external Java libraries are not supported
-
-*	- *Content Type:* symbolic link (to an existing project)
-	- *Allowable within:* group
-	- *Purpose:* A symbolic link to another group's project can be included, allowing projects to be contained within multiple projects. For example, it is possible to cycle through all the projects by creating a new group and adding a symbolic link for each and every project
-
-
-The layout of these elements can be seen here:
-![An illustration of how each of the content elements are positioned.](https://raw.github.com/torbensko/billboard/master/README_img/layout_elements.png)
-
-The layout of the page will be automatically altered to ensure all the text (titles and blurbs) is visible. If the page contains a lot of text, the remaining content will be reduced in size. It is therefore important to keep the blurbs concise.
-
-It should also be noted that all the content is optional. The following shows how the layout changes depending on what content is provided:
-![An illustration of how the system adapts it appearance based on what content is included.](https://raw.github.com/torbensko/billboard/master/README_img/layout_examples.png)
-
-For example, if no text is present (i.e. titles and descriptions) the content will be displayed full screen - in a slide-show manner
 
 
 
 # Setting Up
 
-The system involves two components: 
+The system involves the following components: 
 
-* A *server* for holding a master copy of the user content.
-* One or more *display computers*, each with their own copy of the user-content.
+-	The display content
+-	A *server*, which holds the primary copy of the display content
+-	One or more *display computers*, each with their own copy of the user-content.
 
 Each display computer only needs to connect to the server once in order to fetch the user content. This process involves visiting a specific URL on the *server*. The rest of the process (i.e. syncronising the content and system files) is automatically handled by the *display computer*.
 
 
-## The Server
+## Display content
 
-The server has been developed in PHP and is designed to run using Apache. The server will serve up the user-provided content from a folder called *contents*. The contents of this folder may look something like the following:
+The content to be displayed resides in the `contents` folder (an example is included). The content displayed by the system is organised into *groups*, which contains one or more *projects*. Each display computer will cycle through the *projects* of a chosen *group*.
+
+The group/project structure is defined by the folder structure of the contents directory. For example:
 
 ![Example file structure layout.](https://raw.github.com/torbensko/billboard/master/README_img/content_structure.png)
 
-The first level folders are treated as *groups* and the second level as *projects* (see above). All lower level folders are ignored, allowing content to kept alongside a project without it being displayed. If a project folder is called *ignore* it, similarly, will not have its content displayed.
+Within each group and project folder the following files are allowed:
+
+- 	title.txt/md
+	
+	Allowable within both group and project folders
+	
+
+-	blurb.txt/md
+
+	Allowable within both group and project folders
+
+-	contact.txt/md
+
+	Allowable within both group and project folders
+
+-	logo.png
+	
+	Allowable within group folders
+
+-	images (e.g. jpg, png), videos (e.g. mov, mp4), Processing code (i.e .pde)
+	
+	Allowable within project folders
+
+	Images are shown as a slide-show (fullscreen when no other content exists), while the videos and Processing pieces are shown one at a time. The layout of these elements can be seen here:
+
+	![An illustration of how the system adapts it appearance based on what content is included.](https://raw.github.com/torbensko/billboard/master/README_img/layout_examples.png)
+
+- 	Symbolic link
+	
+	Allowable within the group folders
+
+	This allows a project to appear across multiple groups.
+
+
+The layout of these elements can be seen below. The pages dynamically resizes itself to ensure all text is visible, making it important to keep the blurbs concise.
+
+![An illustration of how each of the content elements are positioned.](https://raw.github.com/torbensko/billboard/master/README_img/layout_elements.png)
+
+
+
+## The Server
+
+The server can either be setup as a simple file server or as a more responsive PHP server. Both are detailed below.
+
+### File/static server
+
+A simple Node based file server is included. While simpler to run, this approach requires you manually update an XML file whenever altering the display content. 
+
+The included file server can be started using the command:
+
+	node simpleServer.js
+
+You can then access the system via
+
+	http://localhost:8080
+
+If you update your display content, you will need to regenerate the XML describing your display content. This can be done by running the command:
+
+	php contents_dynamic.php > contents_static.xml
+
+You will also need to update the `offline.appcache` file. This can be done be done by running:
+
+	cd scripts 
+	./generateAppcacheFile.sh
+
+
+## Dynamic server
+
+A set of PHP scripts are included that avoid the need to regenerate the display content XML file. dynamically create the XML file. 
 
 To set up a new server, you will need to the following:
 
@@ -100,7 +114,8 @@ To set up a new server, you will need to the following:
 
 ## Display computer
 
-Each display computer shows the content from a chosen *group*. It is possible to run multiple-screens off a single computer, as explained. Once the server is set up, setting up each display computer is relatively simple.
+Each display computer shows the content from a chosen *group*. The instructions below explain how to set up a machine to work as dedicated billboard machine.
+
 
 ### The quick set up: (single screen, auto-start)
 
@@ -136,7 +151,9 @@ The repository also includes a script to help you set up a display system so tha
 6.	Set the machine to boot up at an appropriate time (this functionality may not be available on all computers).
 
 
-## Other set up tips:
+## Development
 
-The *_dev* folder may include some additional scripts to help with this process setup and deployment process. Please refer to the instructions in those scripts for details of their purpose and use.
+To clear the appcache in Chrome visit:
+	
+	chrome://appcache-internals/
 
